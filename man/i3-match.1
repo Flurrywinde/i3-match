@@ -319,6 +319,24 @@ Wait for a window to be created, then exit.
 .TP
 .B i3\-match \-Sm :evtype=window container/focused=true \-o container/name
 Print the name of the focused window every time it changes.
+.TP
+.B i3\-match focused=true \-o window_properties/{class,instance,window_role,title} window id marks rect percent
+Note brace expansion and lack of commas.
+.TP
+.B i3\-match \-Sm :evtype=window container/focused=true \-o container/{window_properties/{class,instance,window_role,title},window,id,marks,rect,percent}
+Same as above but when going by event, container/ and commas are needed.
+.TP
+.B i3\-match :workspace=$(i3\-match focused=true \-o :workspace) window_properties/class=Google\-chrome \-o window
+Match on current workspace only.
+.TP
+.B i3\-match type=workspace num=1 \-o name
+Get workspace name from workspace num.
+.TP
+.B i3\-match type=workspace name=$wsname \-o num
+Get workspace num from workspace name.
+.TP
+.B i3\-match :workspace=$wsname window_type!= \-o window
+Get all normal windows on a workspace (Some "normal" windows don't have window_type=normal, so don't use that.).
 
 .SH SEE ALSO
 .P
